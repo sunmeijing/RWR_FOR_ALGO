@@ -5,12 +5,13 @@
 
 ## Installation
 This project is mainly written in Python, you need to install several packages.
+Later on, I will write the package egg for it. However, not now.
 * networkx
 * pydot
 * metis
 * numpy
 * scipy
-Later on, I will write the package egg for it. However, not now.
+
 
 ## Bug
 It has several bugs to track on.
