@@ -156,12 +156,6 @@ def on_the_fly_method():
     pass
 
 
-
-
-
-
-
-
 def help_draw_graph(graph, fn):
     write_dot(G, 'temp_example.dot')
     g = pydot.graph_from_dot_file('temp_example.dot')
