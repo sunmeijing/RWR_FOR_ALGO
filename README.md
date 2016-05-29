@@ -1,7 +1,7 @@
 # RWR_FOR_ALGO
 ## Introduction
-b_lin.py: is the main content of the project, it contains several functions to generate the relations of the dot in the graph
-paper directory: some paper references for reading
+* b_lin.py: the main content of the project, it contains several functions to generate the relations of the dot in the graph
+* paper directory: some paper references for reading
 
 ## Installation
 This project is mainly written in Python, you need to install several packages.
