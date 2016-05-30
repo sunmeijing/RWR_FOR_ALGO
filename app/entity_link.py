@@ -93,12 +93,17 @@ if __name__ == "__main__":
     score = tfidf_util.construct_from_dict(links, doc)
     mentions = []
     candidates = {}
-    glb_entity = {}
+    entities = {}
+    for name in mp.keys():
+        entities[name] = (mp[name], name)
     for word in doc:
-        mention = {node:mp[word],content:word}
-        glb_dic[word] = mention
-        mentions.append(mention)
+        mentions.append(entities[word])
     for word in doc:
-        for candidate in links[word]:
-            candidates[glb_dic[candidate]]
-    entity_link(mentions,g,candidates,score)
+        if word in links.keys():
+            for candidate_name in links[word]:
+                if entities[word] not in candidates.keys():
+                    candidates[entities[word]] = []
+                candidates[entities[word]].append(entities[candidate_name])
+
+    print candidates
+    # entity_link(mentions, g, candidates, score)
