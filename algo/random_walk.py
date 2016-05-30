@@ -1,41 +1,9 @@
-import numpy
 import metis
-import networkx as nx
-from networkx.drawing.nx_agraph import write_dot
-import pydot
-from scipy.sparse import csgraph
+import numpy
 
-PROB = 0.3
+from util import numpy_helper, graph_util
 
-
-def prepare_nx_graph():
-    G = nx.Graph()
-    G.add_node(0)
-    G.add_node(1)
-    G.add_node(2)
-    G.add_node(3)
-    G.add_node(4)
-    G.add_edge(0, 0, weight=1)
-    G.add_edge(1, 1, weight=1)
-    G.add_edge(2, 2, weight=1)
-    G.add_edge(3, 3, weight=1)
-    G.add_edge(4, 4, weight=1)
-    G.add_edge(1, 2, weight=1)
-    # G.add_edge(2, 3, weight=1)
-    # G.add_edge(1, 3, weight=1)
-    G.add_edge(2, 4, weight=1)
-    G.add_edge(1, 4, weight=1)
-    G.add_edge(0, 3, weight=3)
-    # G.add_edge(0, 2, weight=4)
-    G.add_edge(3, 4, weight=5)
-
-    G.graph['edge_weight_attr'] = 'weight'
-    return G
-
-
-def normalize_matrix(W):
-    # TODO other algorithm
-    return numpy.asmatrix(csgraph.laplacian(W, normed=True))
+PROB = 0.5
 
 
 def low_rank_approx_svd(W2, t):
@@ -44,11 +12,11 @@ def low_rank_approx_svd(W2, t):
     U = numpy.asmatrix(U)
     V = numpy.asmatrix(V)
     S = numpy.asmatrix(numpy.diag(s))
-    print S
+
     return U, S, V
 
 
-def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, t=False):
+def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, approx_rank=False):
 
     """
     :param nx_graph: networkx graph
@@ -56,7 +24,7 @@ def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, t=False):
     to split the graph into several parts
     note: might get fewer cuts desired
     :param prob: probability to restart to origin pos
-    :param t: the similarity to decompose the W2 matrix
+    :param approx_rank: the similarity to decompose the W2 matrix
     :return: W_telta, Q1_I, U, A, V
     :bug: if the W2 is a singular matrix then A fails
     """
@@ -77,23 +45,16 @@ def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, t=False):
     # print (objval, parts)
     # we build the W_telta as a normalized matrix
     node_size = len(nx_graph.nodes())
-    W = numpy.matrix([[0.0]*node_size]*node_size)
+
     # first we construct the index
     row_idx = []
     for part in groups.keys():
         for idx in groups[part]:
             row_idx.append(idx)
 
-    # then build the W
-    for i in range(0, node_size):
-        for j in range(0, node_size):
-            if row_idx[j] in nx_graph.neighbors(row_idx[i]):
-                W[i, j] = nx_graph[row_idx[i]][row_idx[j]]["weight"]
-            else:
-                W[i, j] = 0
-    # finally normalize it
+    # represent and normalize the matrix
     # we could use other methods to normalize to see the effect
-    W_telta = normalize_matrix(W)
+    W_telta = numpy_helper.normalize_matrix(nx_graph)
 
     # phase 2 and 3
     # w1 contains all within partition link
@@ -123,12 +84,14 @@ def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, t=False):
     # currently we use the default
     # *we may further use other approx to test*
     # #pymf#
-    U,S,V = low_rank_approx_svd(W2, t)
+    U, S, V = low_rank_approx_svd(W2, approx_rank)
     # TODO if u v s is not full rank matrix we need to compute NB_LIN
     try:
         S_I = S.I
     except Exception:
-        return None
+        # make it reverse
+        S += 1e-15 *numpy.identity(S.shape[0])
+
     # phase 6 construct Q1_I
     Q1_I = numpy.matrix([[0.0]*node_size]*node_size)
     diag_index = 0
@@ -156,17 +119,13 @@ def on_the_fly_method():
     pass
 
 
-def help_draw_graph(graph, fn):
-    write_dot(G, 'temp_example.dot')
-    g = pydot.graph_from_dot_file('temp_example.dot')
-    g.write_png(fn)
-
 if __name__ == "__main__":
-    W_telta, Q1_I, U, A, V = offline_b_lin_method(prepare_nx_graph(), 2)
+
+    W_telta, Q1_I, U, A, V = offline_b_lin_method(graph_util.prepare_test_nx_graph(), 2)
     ei = numpy.array([[1], [0], [0], [0], [0]])
 
     r1 = online_b_lin_method(Q1_I, ei, U, A, V)
-    r2 = pre_compute_method(W_telta,ei)
-    print r2-r1
+    r2 = pre_compute_method(W_telta, ei)
+
 
 
