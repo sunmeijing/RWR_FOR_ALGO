@@ -1,28 +1,40 @@
 import networkx
+import numpy
+import itertools
+from collections import defaultdict
+import copy
 
 
-def simrank(G, r=0.8, max_iter=100, eps=1e-4):
+def simrank(G, r=0.9, max_iter=100):
+    # init. vars
+    sim_old = defaultdict(list)
+    sim = defaultdict(list)
+    for n in G.nodes():
+        sim[n] = defaultdict(int)
+        sim[n][n] = 1
+        sim_old[n] = defaultdict(int)
+        sim_old[n][n] = 0
 
-    nodes = G.nodes()
-    nodes_i = {k: v for(k, v) in [(nodes[i], i) for i in range(0, len(nodes))]}
-
-    sim_prev = numpy.zeros(len(nodes))
-    sim = numpy.identity(len(nodes))
-
-    for i in range(max_iter):
-        if numpy.allclose(sim, sim_prev, atol=eps):
+    # recursively calculate simrank
+    for iter_ctr in range(max_iter):
+        if _is_converge(sim, sim_old):
             break
-        sim_prev = numpy.copy(sim)
-        for u, v in itertools.product(nodes, nodes):
-            if u is v:
-                continue
-            u_ns, v_ns = G.predecessors(u), G.predecessors(v)
-
-            # evaluating the similarity of current iteration nodes pair
-            if len(u_ns) == 0 or len(v_ns) == 0:
-                # if a node has no predecessors then setting similarity to zero
-                sim[nodes_i[u]][nodes_i[v]] = 0
-            else:
-                s_uv = sum([sim_prev[nodes_i[u_n]][nodes_i[v_n]] for u_n, v_n in itertools.product(u_ns, v_ns)])
-                sim[nodes_i[u]][nodes_i[v]] = (r * s_uv) / (len(u_ns) * len(v_ns))
+        sim_old = copy.deepcopy(sim)
+        for u in G.nodes():
+            for v in G.nodes():
+                if u == v:
+                    continue
+                s_uv = 0.0
+                for n_u in G.neighbors(u):
+                    for n_v in G.neighbors(v):
+                        s_uv += sim_old[n_u][n_v]
+                sim[u][v] = (r * s_uv / (len(G.neighbors(u)) * len(G.neighbors(v))))
     return sim
+
+
+def _is_converge(s1, s2, eps=1e-4):
+    for i in s1.keys():
+        for j in s1[i].keys():
+            if abs(s1[i][j] - s2[i][j]) >= eps:
+                return False
+    return True

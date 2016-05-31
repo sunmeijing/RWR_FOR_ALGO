@@ -7,14 +7,14 @@ from util import kl, simrank, numpy_helper, tfidf_util, graph_util
 def compute_document_signature(W_telta, Ed, candidates, mentions, tfidf, prob=0.15):
     # TODO
     node_sz = W_telta.shape[0]
-    vector = np.array([[0]]*node_sz)
+    vector = np.array([[0.0]]*node_sz)
     for entity in Ed:
         v = 0
         for mention in mentions:
             if entity in candidates[mention]:
                 # we use uniformly weights
                 v = tfidf[mention] * 1/len(candidates[mention])
-        vector[entity.node] = v
+        vector[entity[0]] = v
     r = random_walk.pre_compute_method(W_telta, vector, prob)
     r = numpy_helper.normalize_vector(r)
     return r
@@ -23,8 +23,8 @@ def compute_document_signature(W_telta, Ed, candidates, mentions, tfidf, prob=0.
 def compute_entity_signature(W_telta, entity, prob=0.15):
     # TODO
     l = W_telta.shape[0]
-    ei = np.array([[0]]*l)
-    ei[entity.node] = 1
+    ei = np.array([[0.0]]*l)
+    ei[entity[0]] = 1
     r = random_walk.pre_compute_method(W_telta, ei, prob)
     r = numpy_helper.normalize_vector(r)
     return r
@@ -32,7 +32,7 @@ def compute_entity_signature(W_telta, entity, prob=0.15):
 
 def semantic_similarity(sig_entity, sig_document):
 
-    return kl.kl(sig_entity, sig_document, 20)
+    return 1.0/kl.kl(sig_entity, sig_document, 20)
 
 
 def entity_link(mentions, graph, candidates, tfidf):
@@ -55,8 +55,8 @@ def entity_link(mentions, graph, candidates, tfidf):
         elif len(candidates[mention]) == 0:
             T[mention] = None
         elif len(candidates[mention]) == 1:
-            Ed = Ed.append(candidates[mention][0])
-
+            Ed.append(candidates[mention][0])
+            T[mention] = candidates[mention][0]
     if len(Ed) == 0:
         # currently we don't want to do this
         pass
@@ -65,6 +65,7 @@ def entity_link(mentions, graph, candidates, tfidf):
 
     mentions = sorted(mentions, key=lambda mention: len(candidates[mention]))
     local_sims = simrank.simrank(graph)
+    print local_sims
     for mention in mentions:
         if len(candidates[mention]) > 1:
             max_score = -999999999999
@@ -72,7 +73,7 @@ def entity_link(mentions, graph, candidates, tfidf):
             for entity in candidates[mention]:
                 sig_entity = compute_entity_signature(W_telta, entity)
                 phy_2 = semantic_similarity(sig_entity, sig_document)
-                phy_1 = local_sims[mention.node][entity.node]
+                phy_1 = local_sims[mention[0]][entity[0]]
                 if phy_1+phy_2 > max_score:
                     max_score = phy_1 + phy_2
                     max_score_entity = entity
@@ -86,11 +87,10 @@ def entity_link(mentions, graph, candidates, tfidf):
                 sig_document = compute_document_signature(W_telta, Ed, candidates, mentions, tfidf)
     return T
 
-if __name__ == "__main__":
-    links = {"zs":["shzs","bjzs","njzs"],"shzs":["maths"],"bjzs":["english","cpu"],"njzs":["cpu"]}
-    doc = ["zs","cpu"]
+
+def wrap_link_document(links, doc):
     g, mp = graph_util.construct_from_dict(links)
-    score = tfidf_util.construct_from_dict(links, doc)
+    impscore = tfidf_util.construct_from_dict(links, doc)
     mentions = []
     candidates = {}
     entities = {}
@@ -104,6 +104,8 @@ if __name__ == "__main__":
                 if entities[word] not in candidates.keys():
                     candidates[entities[word]] = []
                 candidates[entities[word]].append(entities[candidate_name])
+    tdi = {}
+    for word in impscore:
+        tdi[entities[word]] = impscore[word]
+    return mentions, candidates, g, tdi, entities
 
-    print candidates
-    # entity_link(mentions, g, candidates, score)
