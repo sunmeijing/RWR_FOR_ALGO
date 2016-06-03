@@ -3,7 +3,7 @@ import numpy
 
 from util import numpy_helper, graph_util
 
-PROB = 0.5
+PROB = 0.85
 
 
 def low_rank_approx_svd(W2, t):
@@ -26,7 +26,7 @@ def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, approx_rank
     :param prob: probability to restart to origin pos
     :param approx_rank: the similarity to decompose the W2 matrix
     :return: W_telta, Q1_I, U, A, V
-    :bug: if the W2 is a singular matrix then A fails
+    :note: if the W2 is a singular matrix then A add some value to it
     """
 
     # phase 1: graph partition
@@ -110,7 +110,7 @@ def online_b_lin_method(Q1_I, ei, U, A, V, prob = PROB):
     return (1-prob)*(Q1_I*ei+prob*Q1_I*U*A*V*Q1_I*ei)
 
 
-def pre_compute_method(W_telta, ei, prob = PROB):
+def pre_compute_method(W_telta, ei, prob=PROB):
     return (1-prob)*(numpy.identity(W_telta.shape[0])-prob*W_telta).I*ei
 
 
