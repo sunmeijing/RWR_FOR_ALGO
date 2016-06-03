@@ -60,8 +60,12 @@ def entity_link(mentions, graph, candidates, tfidf):
             Ed.append(candidates[mention][0])
             T[mention] = candidates[mention][0]
     if len(Ed) == 0:
-        # currently we don't want to do this
-        pass
+        # currently
+        for mention in mentions:
+            for entity in candidates[mention]:
+                Ed.append(entity)
+        if len(Ed) == 0:
+            return T
 
     sig_document = compute_document_signature(W_telta, Ed, candidates, mentions, tfidf)
 

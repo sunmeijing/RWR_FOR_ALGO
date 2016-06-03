@@ -58,20 +58,28 @@ class tfidf:
         return sims
 
 
-def construct_from_dict(dic, doc):
+def construct_from_dict(dic, doc, delimeter="$", disambiguation=" (disambiguation)"):
     in_counts_mp = {}
     out_counts_mp = {}
     for word in doc:
+
         in_counts_mp[word] = doc.count(word)
         if word not in out_counts_mp.keys():
             out_counts_mp[word] = 0
             for key in dic:
                 if key == word:
                     out_counts_mp[word] += 1
+                elif key == delimeter+word+delimeter:
+                    out_counts_mp[word] += 1
+                elif key == delimeter+word+disambiguation + delimeter:
+                    out_counts_mp[word] += 1
                 elif word in dic[key]:
                     out_counts_mp[word] += 1
 
     tdf = {}
     for word in doc:
-        tdf[word] = 1.0*in_counts_mp[word]/len(doc) * math.log(len(dic.keys())/out_counts_mp[word])
+        if out_counts_mp[word] == 0:
+            out_counts_mp[word] = 1
+        else:
+            tdf[word] = 1.0*in_counts_mp[word]/len(doc) * math.log(len(dic.keys())/out_counts_mp[word])
     return tdf
