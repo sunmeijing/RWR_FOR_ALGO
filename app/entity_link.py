@@ -3,8 +3,10 @@ import numpy as np
 from algo import random_walk
 from util import kl, simrank, numpy_helper, tfidf_util, graph_util
 
+PROB = 0.85
 
-def compute_document_signature(W_telta, Ed, candidates, mentions, tfidf, prob=0.15):
+
+def compute_document_signature(W_telta, Ed, candidates, mentions, tfidf, prob=PROB):
     # TODO
     node_sz = W_telta.shape[0]
     vector = np.array([[0.0]]*node_sz)
@@ -20,7 +22,7 @@ def compute_document_signature(W_telta, Ed, candidates, mentions, tfidf, prob=0.
     return r
 
 
-def compute_entity_signature(W_telta, entity, prob=0.15):
+def compute_entity_signature(W_telta, entity, prob=PROB):
     # TODO
     l = W_telta.shape[0]
     ei = np.array([[0.0]]*l)

@@ -1,6 +1,7 @@
 from app import entity_link
 from util import doc_parser
 
+
 def small_reason_test():
     links = {"zs": ["shzs", "bjzs", "njzs"], "shzs": ["maths"], "bjzs": ["english", "cpu"], "njzs": ["cpu"],
              "maths": ["science"],"cpu":["science"],"english":["literature"]}
@@ -20,9 +21,9 @@ def small_reason_test_2():
 
     T = entity_link.entity_link(mentions, g, candidates, tdi)
     print T
-    #assert T[entities["zs"]] == entities["bjzs"]
+    assert T[entities["zs"]] == entities["njzs"]
 
 
 if __name__ == "__main__":
-    # small_reason_test_2()
-    print doc_parser.parse("../doc/doc0.txt")
+    small_reason_test_2()
+    #print doc_parser.parse("../doc/doc0.txt")
