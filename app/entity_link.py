@@ -17,6 +17,7 @@ def compute_document_signature(W_telta, Ed, candidates, mentions, tfidf, prob=PR
                 # we use uniformly weights
                 v = tfidf[mention] * 1/len(candidates[mention])
         vector[entity[0]] = v
+    vector = numpy_helper.normalize_vector(vector)
     r = random_walk.pre_compute_method(W_telta, vector, prob)
     r = numpy_helper.normalize_vector(r)
     return r
@@ -47,8 +48,13 @@ def entity_link(mentions, graph, candidates, tfidf):
     """
     Ed = []
     T = {}
+    # corner case to check that there is no single node to assure
+    for node in graph.nodes():
+        if len(graph.neighbors(node)) == 0:
+            # we add self link
+            graph.add_edge(node, node, weight=1)
     W_telta = numpy_helper.normalize_matrix(graph)
-    SIMLARITY_THREHOLD = 0.01
+    SIMLARITY_THREHOLD = 0
 
     for mention in mentions:
         if mention not in candidates.keys():
@@ -71,22 +77,27 @@ def entity_link(mentions, graph, candidates, tfidf):
 
     mentions = sorted(mentions, key=lambda mention: len(candidates[mention]))
     local_sims = simrank.simrank(graph)
-    print local_sims
+    # print local_sims
     for mention in mentions:
         if len(candidates[mention]) > 1:
             max_score = -999999999999
             max_score_entity = None
             for entity in candidates[mention]:
                 sig_entity = compute_entity_signature(W_telta, entity)
+                # use this cause too many noise
+                # if one link has many sub node then it can be very high
+                phy_1 = local_sims[mention[0]][entity[0]] / 10000
                 phy_2 = semantic_similarity(sig_entity, sig_document)
-                phy_1 = local_sims[mention[0]][entity[0]]
+
+
+                print entity[1],":",mention, phy_1 , phy_2
                 if phy_1+phy_2 > max_score:
                     max_score = phy_1 + phy_2
                     max_score_entity = entity
 
             if max_score < SIMLARITY_THREHOLD:
                 T[mention] = None
-                candidates[mention].remove(max_score_entity)
+                #candidates[mention].remove(max_score_entity)
             else:
                 Ed.append(max_score_entity)
                 T[mention] = max_score_entity
@@ -113,5 +124,6 @@ def wrap_link_document(links, doc):
     tdi = {}
     for word in impscore:
         tdi[entities[word]] = impscore[word]
+    print entities
     return mentions, candidates, g, tdi, entities
 

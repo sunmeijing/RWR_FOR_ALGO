@@ -36,10 +36,19 @@ def small_doc_test():
     T = entity_link.entity_link(mentions, g, candidates, tdi)
     print T
 
+def market_doc_test():
+    mentions = doc_parser.parse("../doc/doc1.txt")
+    links = wikispider_ambiguity.WikiSpider_ambiguity.crawl(words=mentions)
+    print links
+    mentions, candidates, g, tdi, entities = entity_link.wrap_link_document(links, mentions)
+    T = entity_link.entity_link(mentions, g, candidates, tdi)
+    print T
 
 if __name__ == "__main__":
-    # small_reason_test()
-    # small_reason_test_2()
+
+    #small_reason_test()
+    #small_reason_test_2()
     #print doc_parser.parse("../doc/doc0.txt")
 
-    small_doc_test()
+    #small_doc_test()
+    market_doc_test()
