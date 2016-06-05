@@ -69,11 +69,10 @@ def construct_from_dict(dic, doc, delimeter="$", disambiguation=" (disambiguatio
             for key in dic:
                 if key == word:
                     out_counts_mp[word] += 1
-                elif key == delimeter+word+delimeter:
+                elif delimeter+key+delimeter == word:
                     out_counts_mp[word] += 1
-                elif key == delimeter+word+disambiguation + delimeter:
-                    out_counts_mp[word] += 1
-                elif word in dic[key]:
+
+                elif word[len(delimeter):len(word)-len(delimeter)] in dic[key]:
                     out_counts_mp[word] += 1
 
     tdf = {}
@@ -81,5 +80,11 @@ def construct_from_dict(dic, doc, delimeter="$", disambiguation=" (disambiguatio
         if out_counts_mp[word] == 0:
             out_counts_mp[word] = 1
         else:
-            tdf[word] = 1.0*in_counts_mp[word]/len(doc) * math.log(len(dic.keys())/out_counts_mp[word])
+            tdf[word] = 1.0*in_counts_mp[word]/len(doc) * math.log(1.0*len(dic.keys())/out_counts_mp[word])
     return tdf
+
+if __name__ == "__main__":
+    # unit tests
+    links = {"stock": ["market", "finance", "fish"], "market": ["finance", "price"], "price": ["market", "location"]}
+    ans = construct_from_dict(links,["stock","price"], delimeter="")
+    assert ans["stock"] < ans["price"]

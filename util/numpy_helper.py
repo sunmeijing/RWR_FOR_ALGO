@@ -10,7 +10,7 @@ def normalize_vector(v):
 
 
 def normalize_matrix(g):
-    # TODO other algorithm
+
     # laplace
     # then build the W
     # node_size = len(g.nodes())

@@ -1,4 +1,4 @@
-import metis
+
 import numpy
 
 from util import numpy_helper, graph_util
@@ -30,6 +30,7 @@ def offline_b_lin_method(nx_graph, attempt_split_parts=2, prob=PROB, approx_rank
     """
 
     # phase 1: graph partition
+    import metis
     G = metis.networkx_to_metis(nx_graph)
     (objval, parts) = metis.part_graph(G, attempt_split_parts)
     # we should normalize parts since we CAN get the FEWER parts

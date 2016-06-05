@@ -1,8 +1,7 @@
 import networkx
 import numpy
 import itertools
-from collections import defaultdict
-import copy
+
 
 
 def simrank(G, r=0.8, max_iter=100, eps=1e-4):

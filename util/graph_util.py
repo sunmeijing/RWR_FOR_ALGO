@@ -1,6 +1,7 @@
 import networkx as nx
 import pydot
 
+
 def prepare_test_nx_graph():
     G = nx.Graph()
     G.add_node(0)
@@ -52,3 +53,12 @@ def construct_from_dict(dic):
             G.add_edge(mp[key], mp[link], weight=1)
 
     return G, mp
+
+if __name__ == "__main__":
+    # unit tests
+    links = {"zs": ["shzs", "bjzs", "njzs"], "shzs": ["maths"], "bjzs": ["english", "cpu"], "njzs": ["cpu"],
+             "maths": ["science"], "cpu": ["science"], "english": ["literature"]}
+    G, names = construct_from_dict(links)
+    assert (len(G.edges()) == 10)
+    print names
+    print G.edges()

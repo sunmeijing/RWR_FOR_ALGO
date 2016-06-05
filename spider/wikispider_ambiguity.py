@@ -13,7 +13,7 @@ class WikiSpider_ambiguity(Spider):
     start_urls = () # ("http://en.wikipedia.org/wiki/Apple_(disambiguation)",)
     WORDS = []
     handle_httpstatus_list = [404]
-    fn = os.path.realpath(__file__)+"temp_output.txt"
+    fn = os.path.realpath(__file__)+".temp_output.txt"
 
     def __init__(self, *args, **kwargs):
         super(WikiSpider_ambiguity, self).__init__(*args, **kwargs)
@@ -24,7 +24,7 @@ class WikiSpider_ambiguity(Spider):
         self.fl = open(WikiSpider_ambiguity.fn, "wb")
         self.record = {}
         self.max_dis_link = 20
-        self.max_link = 5
+        self.max_link = 10
         self.round = 2
         for word in self.words:
             self.record[word.lower()] = []
@@ -133,8 +133,9 @@ class WikiSpider_ambiguity(Spider):
         return dic
 
 if __name__=="__main__":
+    # unit tests
     process = CrawlerProcess()
-    WikiSpider_ambiguity.WORD = "Apple"
+    WikiSpider_ambiguity.WORD = ["Apple"]
     process.crawl(WikiSpider_ambiguity)
     process.start()
     #cmdline.execute("scrapy runspider wikispider_ambiguity.py".split())
