@@ -112,6 +112,7 @@ def online_b_lin_method(Q1_I, ei, U, A, V, prob = PROB):
 
 
 def pre_compute_method(W_telta, ei, prob=PROB):
+
     return (1-prob)*(numpy.identity(W_telta.shape[0])-prob*W_telta).I*ei
 
 

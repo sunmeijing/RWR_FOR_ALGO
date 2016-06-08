@@ -1,68 +1,116 @@
 from app import entity_link
 from util import doc_parser
+from record_deco import *
+from algo import random_walk, distance
 from spider import wikispider_ambiguity
 
 
+def judge(T, ansfn):
+    # read from the file
+    ans_pair = doc_parser.read_ans_pair(ansfn)
+    corrects = []
+    if ans_pair == 0:
+        return 1.0, corrects
+
+    for ans in ans_pair:
+        for run_ans_key in T.keys():
+            if run_ans_key[1] == ans[0] and ans[1] == T[run_ans_key][1]:
+                corrects.append(ans)
+
+    return 1.0*len(corrects)/len(ans_pair), corrects
+
+
+@record_judge_result("./record.txt")
+@record_time("./record.txt")
+@record_use_parameter("./record.txt", depth=2, width=5, prob=0.85, kl_l=20)
+@record_plug_algo("./record.txt", choice="with_dot")
+def test_framework(docfn=None, ansfn=None, to_judge=False, links=None, doc=None,
+                   delimeter="$", width=wikispider_ambiguity.ENTITY_WIDTH, depth=wikispider_ambiguity.DEPTH,
+                   prob=random_walk.PROB, kl_l=distance.KL_L, choice="normal"):
+    print ansfn
+    if to_judge and not ansfn:
+        raise Exception("please give ansfn")
+    if docfn:
+        doc = doc_parser.parse(docfn)
+        links = wikispider_ambiguity.WikiSpider_ambiguity.crawl(words=doc, width=width, depth=depth)
+
+    mentions, candidates, g, tdi, prior, entities \
+        = entity_link.wrap_link_document(links, doc, delimeter=delimeter)
+    T = None
+    if choice == "normal":
+        T = entity_link.entity_link(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
+    elif choice == "only_simrank":
+        T = entity_link.entity_link_only_with_simrank(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
+    elif choice == "only_rwr":
+        T = entity_link.entity_link_only_with_rwr(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
+    elif choice == "with_dot":
+        T = entity_link.entity_link(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=False)
+    if to_judge:
+        return judge(T, ansfn)
+    else:
+        return T, entities
+
+
 def small_reason_test():
+    # should return the ref with the only linking candidate
     links = {"zs": ["shzs", "bjzs", "njzs"], "shzs": ["maths"], "bjzs": ["english", "cpu"], "njzs": ["cpu"],
              "maths": ["science"],"cpu":["science"],"english":["literature"]}
     doc = ["zs", "english"]
-    mentions, candidates, g, tdi, entities = entity_link.wrap_link_document(links, doc)
-
-    T = entity_link.entity_link(mentions, g, candidates, tdi)
+    T, entities = test_framework(links=links, doc=doc)
     assert T[entities["zs"]] == entities["bjzs"]
+    return T
 
 
 def small_reason_test_2():
+    # should return the ref with the linking candidate when linking is not the only one
     links = {"zs": ["shzs", "bjzs", "njzs"], "shzs": ["maths","english"], "bjzs": ["english", "cpu"], "njzs": ["maths","cpu"],
              "maths": ["science"], "cpu":["science"],"english":["literature"]}
     doc = ["zs", "cpu", "maths"]
-    mentions, candidates, g, tdi, entities = entity_link.wrap_link_document(links, doc)
-
-    T = entity_link.entity_link(mentions, g, candidates, tdi)
+    T, entities = test_framework(links=links, doc=doc)
     assert T[entities["zs"]] == entities["njzs"]
+    return T
+
+
+def small_reason_test_3():
+    # TODO should catch the only candidate
+    links = {"zs": ["shzs", "bjzs", "njzs"], "shzs": ["maths"], "bjzs": ["english", "cpu"], "njzs": ["cpu"],
+             "maths": ["science"], "cpu": ["science"], "english": ["literature"]}
+    doc = ["zs", "english"]
+    return T
 
 
 def small_reason_noise_test():
     links = {"stock":["market","finance","fish"],"market":["finance","price"],"price":["market","location"]}
-    mentions = ["stock","price"]
-    mentions, candidates, g, tdi, prior, entities = entity_link.wrap_link_document(links, mentions)
-    T = entity_link.entity_link(mentions, g, candidates, tdi, prior)
+    doc = ["stock","price"]
+    T, entities = test_framework(links=links, doc=doc)
     assert T[entities["price"]] == entities["market"]
+    return T
 
 
-def small_doc_test():
-    mentions = doc_parser.parse("../doc/doc0.txt")
-    links = wikispider_ambiguity.WikiSpider_ambiguity.crawl(words=mentions)
-    print links
-    mentions, candidates, g, tdi, prior, entities = entity_link.wrap_link_document(links, mentions)
-    T = entity_link.entity_link(mentions, g, candidates, tdi, prior)
-    print T
+def small_doc_test(to_judge=False):
+    T, entities = test_framework(docfn="../doc/doc0.txt", ansfn="../doc/ans/doc0.txt",to_judge=to_judge)
+    return T
 
 
-def market_doc_test():
-    mentions = doc_parser.parse("../doc/doc1.txt")
-    links = wikispider_ambiguity.WikiSpider_ambiguity.crawl(words=mentions)
-    print links
-    mentions, candidates, g, tdi, prior, entities = entity_link.wrap_link_document(links, mentions)
-    T = entity_link.entity_link(mentions, g, candidates, tdi, prior)
-    print T
+def market_doc_test(to_judge=False):
+    T, entities = test_framework(docfn="../doc/doc1.txt", ansfn="../doc/ans/doc1.txt", to_judge=to_judge)
+    return T
 
-def first_article_test():
-    mentions = doc_parser.parse("../doc/A Weekend in Chicago: Where Gunfire Is a Terrifying Norm")
-    links = wikispider_ambiguity.WikiSpider_ambiguity.crawl(words=mentions)
-    print links
-    mentions, candidates, g, tdi, prior, entities = entity_link.wrap_link_document(links, mentions)
-    T = entity_link.entity_link(mentions, g, candidates, tdi, prior)
-    print T
+
+def first_article_test(to_judge=False):
+    T, entities = test_framework(docfn="../doc/A Weekend in Chicago: Where Gunfire Is a Terrifying Norm",
+                                 ansfn="../doc/A Weekend in Chicago: Where Gunfire Is a Terrifying Norm",
+                                 to_judge=to_judge)
+    return T
 
 
 if __name__ == "__main__":
 
-    #small_reason_test()
-    #small_reason_test_2()
+    small_doc_test(to_judge=True)
+    #small_reason_noise_test()
     #print doc_parser.parse("../doc/doc0.txt")
 
     #small_doc_test()
-    first_article_test()
+    #T = market_doc_test()
+    #print T
     #kl_test()

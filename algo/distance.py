@@ -2,8 +2,10 @@ import numpy as np
 import math
 import util.numpy_helper
 
+KL_L = 20
 
-def kl(p, q, l=20):
+
+def kl(p, q, kl_l=KL_L):
     """Kullback-Leibler divergence D(P || Q) for discrete distributions
 
     Parameters
@@ -22,7 +24,7 @@ def kl(p, q, l=20):
 
     for i in range(0, p.shape[0]):
         if q[i] == 0:
-            sums += p[i, 0]*l
+            sums += p[i, 0]*kl_l
         elif p[i] == 0:
             sums += 0
         else:
@@ -30,7 +32,7 @@ def kl(p, q, l=20):
     return sums
 
 
-def vdist(p, q):
+def vdist(p, q, kl_l=0):
 
     p = util.numpy_helper.normalize_vector(p)
     q = util.numpy_helper.normalize_vector(q)
