@@ -1,0 +1,9 @@
+$NEW YORK$:
+$Stock$:
+$commodity$:
+$price$:
+$Share$:
+$Stock Exchange$:
+$Nasdaq$:
+$market$:
+
