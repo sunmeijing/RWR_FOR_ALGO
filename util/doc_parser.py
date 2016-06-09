@@ -44,8 +44,8 @@ def read_ans_pair(ansfn):
 
 if __name__ == "__main__":
     # unit tests
-    # filenames = next(os.walk("../doc"))[2]
+    filenames = next(os.walk("../doc"))[2]
     # print filenames
-    # for fn in filenames:
-    #    copy_mentions_into_answers("../doc/"+fn, "../doc/ans/"+fn)
-    print judge({(0,"$Jiaotong University$"): (1, "a")}, "../doc/ans/doc0.txt")
+    for fn in filenames:
+        copy_mentions_into_answers("../doc/"+fn, "../doc/ans/"+fn)
+    #print judge({(0,"$Jiaotong University$"): (1, "a")}, "../doc/ans/doc0.txt")

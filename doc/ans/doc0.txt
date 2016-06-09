@@ -1,10 +1,6 @@
-$Jiaotong University$:Shanghai Jiaotong University
-
-$Apple Inc.$:Apple Inc.
-
-$iPad$:IPad Mini 4
-
-$Apple$:Apple Inc.
-
-$Shanghai$:Shanghai
-
+$Jiaotong University$:
+$Apple Inc.$:
+$iPad$:
+$Apple$:
+$Shanghai$:
+

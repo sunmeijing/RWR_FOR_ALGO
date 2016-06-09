@@ -59,3 +59,20 @@ def record_judge_result(fn):
                 return accuracy, valid_tuple
         return wrapper
     return real_decorator
+
+
+def record_results(fn, title):
+    def real_decorator(func):
+        def wrapper(*args, **kwargs):
+            with open(fn, "a") as f:
+                T, entities = func(*args, **kwargs)
+
+                f.write("\r\n"+title+",answer:"+"\r\n")
+                for t in T.keys():
+                    if T[t]:
+                        f.write(t[1]+","+T[t][1]+"\r\n")
+                    else:
+                        f.write(t[1] + "," + "None" + "\r\n")
+                return T, entities
+        return wrapper
+    return real_decorator

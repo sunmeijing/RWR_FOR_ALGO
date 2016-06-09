@@ -38,7 +38,6 @@ class WikiSpider_ambiguity(Spider):
 
         if len(titles) == 0:
             return
-        #print "parse entity", titles
         title = titles[0]
         links = response.xpath(
             '//div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/descendant::p/a/@href').extract()
@@ -52,7 +51,6 @@ class WikiSpider_ambiguity(Spider):
             if not self.record.has_key(word):
                 self.record[title].append(word)
                 nexts.append("http://en.wikipedia.org" + links[l])
-        # print "#####", rd, "#####", self.record
         # go to the next link
         for page in nexts:
             yield Request(page, self.parse_entity_page, meta={'round': rd - 1})

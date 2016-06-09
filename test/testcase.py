@@ -5,6 +5,10 @@ from algo import random_walk, distance
 from spider import wikispider_ambiguity
 
 
+DATA_PATH = "./data/"
+DATA_NAME = "doc0.txt"
+
+
 def judge(T, ansfn):
     # read from the file
     ans_pair = doc_parser.read_ans_pair(ansfn)
@@ -20,10 +24,11 @@ def judge(T, ansfn):
     return 1.0*len(corrects)/len(ans_pair), corrects
 
 
-@record_judge_result("./record.txt")
-@record_time("./record.txt")
-@record_use_parameter("./record.txt", depth=2, width=5, prob=0.85, kl_l=20)
-@record_plug_algo("./record.txt", choice="with_dot")
+@record_results(DATA_PATH+DATA_NAME, DATA_NAME)
+#@record_judge_result("./record.txt")
+@record_time(DATA_PATH+DATA_NAME)
+@record_use_parameter(DATA_PATH+DATA_NAME, depth=3, width=8, prob=0.85, kl_l=20)
+@record_plug_algo(DATA_PATH+DATA_NAME, choice="normal")
 def test_framework(docfn=None, ansfn=None, to_judge=False, links=None, doc=None,
                    delimeter="$", width=wikispider_ambiguity.ENTITY_WIDTH, depth=wikispider_ambiguity.DEPTH,
                    prob=random_walk.PROB, kl_l=distance.KL_L, choice="normal"):
@@ -33,18 +38,27 @@ def test_framework(docfn=None, ansfn=None, to_judge=False, links=None, doc=None,
     if docfn:
         doc = doc_parser.parse(docfn)
         links = wikispider_ambiguity.WikiSpider_ambiguity.crawl(words=doc, width=width, depth=depth)
+        print links
 
     mentions, candidates, g, tdi, prior, entities \
         = entity_link.wrap_link_document(links, doc, delimeter=delimeter)
     T = None
     if choice == "normal":
-        T = entity_link.entity_link(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
+        T = entity_link.entity_link(
+            mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
     elif choice == "only_simrank":
-        T = entity_link.entity_link_only_with_simrank(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
+        T = entity_link.entity_link_only_with_simrank(
+            mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
     elif choice == "only_rwr":
-        T = entity_link.entity_link_only_with_rwr(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
+        T = entity_link.entity_link_only_with_rwr(
+            mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=True)
     elif choice == "with_dot":
-        T = entity_link.entity_link(mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=False)
+        T = entity_link.entity_link(
+            mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=False)
+    elif choice == "prior":
+        T = entity_link.entity_link_only_with_prior(
+            mentions, g, candidates, tdi, prior, prob=prob, kl_l=kl_l, isKL=False)
+        pass
     if to_judge:
         return judge(T, ansfn)
     else:
@@ -104,9 +118,18 @@ def first_article_test(to_judge=False):
     return T
 
 
-if __name__ == "__main__":
+def try_doc_test():
+    global DATA_PATH
+    global DATA_NAME
+    DATA_NAME = "doc0.txt"
+    test_framework(docfn="../doc/"+DATA_NAME, ansfn="../doc/ans/"+DATA_NAME, to_judge=False)
 
-    small_doc_test(to_judge=True)
+    print "!!!!!!!!!!!!!!!!!!!!!!!!!!!!DONE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+
+
+if __name__ == "__main__":
+    try_doc_test()
+    #small_doc_test(to_judge=False)
     #small_reason_noise_test()
     #print doc_parser.parse("../doc/doc0.txt")
 
