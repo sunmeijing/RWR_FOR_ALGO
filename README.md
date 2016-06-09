@@ -11,6 +11,7 @@ Later on, I will write the package egg for it. However, not now.
 * metis
 * numpy
 * scipy
+* scrapy
 
 
 ## Bug
