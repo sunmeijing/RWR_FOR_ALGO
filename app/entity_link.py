@@ -107,11 +107,15 @@ def entity_link(mentions, graph, candidates, tfidf_score, prior, prob=PROB, kl_l
                     max_score = phy_1 + phy_2
                     max_score_entity = entity
             print "-----------------------------------"
+            for entity in candidates[mention]:
+                if entity != max_score_entity and entity in Ed:
+                    Ed.remove(entity)
             if max_score < SIMLARITY_THREHOLD:
                 T[mention] = None
-                #candidates[mention].remove(max_score_entity)
+
             else:
                 Ed.append(max_score_entity)
+
                 T[mention] = max_score_entity
                 sig_document = __compute_document_signature(W_telta, Ed, candidates, mentions, tfidf_score, prior, prob=prob)
     return T
@@ -183,6 +187,9 @@ def entity_link_only_with_simrank(mentions, graph, candidates, tfidf_score, prio
                     max_score = score
                     max_score_entity = entity
             print "-----------------------------------"
+            for entity in candidates[mention]:
+                if entity != max_score_entity and entity in Ed:
+                    Ed.remove(entity)
             if max_score < SIMLARITY_THREHOLD:
                 T[mention] = None
                 # candidates[mention].remove(max_score_entity)
@@ -244,6 +251,9 @@ def entity_link_only_with_rwr(mentions, graph, candidates, tfidf_score, prior, p
                     max_score = phy_1 + phy_2
                     max_score_entity = entity
             print "-----------------------------------"
+            for entity in candidates[mention]:
+                if entity != max_score_entity and entity in Ed:
+                    Ed.remove(entity)
             if max_score < SIMLARITY_THREHOLD:
                 T[mention] = None
                 #candidates[mention].remove(max_score_entity)

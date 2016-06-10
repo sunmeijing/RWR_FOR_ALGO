@@ -81,6 +81,7 @@ def construct_from_dict(dic, doc, delimeter="$", disambiguation=" (disambiguatio
             out_counts_mp[word] = 1
         else:
             tdf[word] = 1.0*in_counts_mp[word]/len(doc) * math.log(1.0*len(dic.keys())/out_counts_mp[word])
+
     return tdf
 
 if __name__ == "__main__":

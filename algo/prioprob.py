@@ -20,7 +20,7 @@ def construct_from_dict(dic, doc, delimeter="$", disambiguation=" (disambiguatio
                 compositions += 1
             for key in dic.keys():
                 if key != mention:
-                    if mention[1:-1] in dic[key] and prop_entity in dic[key]:
+                    if mention[len(delimeter):len(mention)-len(delimeter)] in dic[key] and prop_entity in dic[key]:
                         compositions += 1
             res[(prop_entity, mention)] = 1.0*compositions/appearance
         appearance = 0
