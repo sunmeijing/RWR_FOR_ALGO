@@ -1,0 +1,21 @@
+,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465468658.9,1465468852.95
+doc0.txt,answer:
+$Apple Inc.$,Apple Inc.
+$iPad$,IPad Mini 4
+$Jiaotong University$,Beijing Jiaotong University
+$Shanghai$,Shanghai
+$Apple$,Apple Inc.
+,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465468995.32,1465469297.56
+doc0.txt,answer:
+$Shanghai$,Shanghai
+$iPad$,IPad
+$Apple Inc.$,Apple Inc.
+$Jiaotong University$,Beijing Jiaotong University
+$Apple$,Apple Inc.
+,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465469791.82,1465469826.61
+doc0.txt,answer:
+$Jiaotong University$,Xi%27an Jiaotong University
+$Shanghai$,Shanghai
+$iPad$,IPod
+$Apple Inc.$,Apple Inc.
+$Apple$,Apple

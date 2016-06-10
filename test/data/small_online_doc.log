@@ -1,0 +1,49 @@
+,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465563874.24,1465564163.06
+small_online_doc.log,answer:
+$Apple$,Apple
+$Apple Inc.$,Apple Inc.
+$Shanghai$,Shanghai
+$iPad$,IPad (1st generation)
+$Jiaotong University$,Xi%27an Jiaotong University
+,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465564264.93,1465564437.88
+small_online_doc.log,answer:
+$iPad$,IPad (1st generation)
+$Jiaotong University$,Xi%27an Jiaotong University
+$Apple$,Apple
+$Massachusetts_Institute_of_Technology$,Massachusetts Institute of Technology
+$Shanghai$,Shanghai
+$Apple Inc.$,None
+,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465564579.72,1465565554.59
+small_online_doc.log,answer:
+$Share$,Share (film)
+$price$,Price Freeway
+$market$,Market (1965 film)
+$Stock Exchange$,Stock exchange
+$Stock$,Stock
+$commodity$,None
+$Nasdaq$,NASDAQ
+$NEW YORK$,New York
+,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465565672.81,1465566654.41
+small_online_doc.log,answer:
+$commodity$,Commodity
+$Share$,Share (finance)
+$market$,Market (economics)
+$Nasdaq$,NASDAQ
+$Stock Exchange$,Stock exchange
+$price$,Price, Wisconsin
+$NEW YORK$,New York
+$Stock$,Stock
+,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465566888.67,1465567215.84
+small_online_doc.log,answer:
+$iPad$,IPad
+$Apple Inc.$,Apple Inc.
+$Apple$,Apple
+$Jiaotong University$,Beijing Jiaotong University
+$Shanghai$,Shanghai
+,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465567684.93,1465568679.56
+small_online_doc.log,answer:
+$Apple Inc.$,None
+$Shanghai$,Shanghai
+$Jiaotong University$,Beijing Jiaotong University
+$Apple$,Apple Records
+$iPad$,IPad Mini 4
