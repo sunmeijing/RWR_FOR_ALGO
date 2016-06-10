@@ -30,5 +30,8 @@ small online doc test:
 		doc1:
 			pass:stock commodity NASDAQ NewYork stockexchange Share market 
 			fail:price 
+Bernie:20 20
+	normal:
+		pass 14/21	
 
 		
