@@ -4,9 +4,19 @@ from record_deco import *
 from algo import random_walk, distance
 from spider import wikispider_ambiguity
 
+Arr = ["'Liquid' Cancer Test Offers Hope for Alternative to Painful Biopsies",
+       "Where Hillary Clinton's Heavy Attack Was Light on Specifics",
+       "The World Reacts on Social Media to Muhammad Ali's Death",
+       "Bernie's Last Stand",
+       "Can the Big Apple Circus Be Saved",
+       "Drew Houston of Dropbox",
+       "For Driverless Cars, Citylike Test Sites Offer the Unpredictable",
+       "Unless You're Oprah, 'Be Yourself' Is Terrible Advice.",
+       "The Families That Can't Afford Summer"
+       ]
 
 DATA_PATH = "./data/"
-DATA_NAME = u"Can the Big Apple Circus Be Saved"
+DATA_NAME = "For Driverless Cars, Citylike Test Sites Offer the Unpredictable"
 
 
 def judge(T, ansfn):
@@ -27,7 +37,7 @@ def judge(T, ansfn):
 @record_results(DATA_PATH+DATA_NAME, DATA_NAME)
 #@record_judge_result("./record.txt")
 @record_time(DATA_PATH+DATA_NAME)
-@record_use_parameter(DATA_PATH+DATA_NAME, depth=2, width=20, prob=0.85, kl_l=20)
+@record_use_parameter(DATA_PATH+DATA_NAME, depth=3, width=10, prob=0.85, kl_l=20)
 @record_plug_algo(DATA_PATH+DATA_NAME, choice="normal")
 def test_framework(docfn=None, ansfn=None, to_judge=False, links=None, doc=None,
                    delimeter="$", width=wikispider_ambiguity.ENTITY_WIDTH, depth=wikispider_ambiguity.DEPTH,

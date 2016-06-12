@@ -70,34 +70,38 @@ class WikiSpider_ambiguity(Spider):
                           meta={"name": first_title})
 
         elif "disambiguation" in page_title or "page lists articles associated with the title" in body_text:
+            if "Wikipedia does not have an article with this exact name" in body_text:
+                print "have no the correspondent article", first_title
+                yield Request("http://en.wikipedia.org/wiki/" + first_title[1:-1], self.parse_disambiguation_page, meta = {"name": first_title})
 
-            print "@this is the exact disambiguation@", first_title
-            # so this is a truly ambiguity page
-            # we need to copy all the links down as the candidates
-            links = response.xpath \
-                ('//div[@id="content"]'
-                 '/div[@id="bodyContent"]'
-                 '/div[@id="mw-content-text"]'
-                 '/descendant::ul/descendant::li/a/@href[not(contains(.,"#"))]').extract()
-            main_links = response.xpath(
-                '//div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/descendant::p/b/a/@href').extract()
-            for l in links:
-                main_links.append(l)
-            links = main_links
-            # print links
-            nexts = []
-            for l in range(0, min(WikiSpider_ambiguity.MAX_DIS_LINK, len(links))):
-                if "wiki" not in links[l] or "disambiguation" in links[l]:
-                    # print "illegal" ,links[l]
-                    continue
-                word = links[l][6:]
-                word = word.replace("_", " ")
-                if not self.record.has_key(word):
-                    self.record[first_title].append(word)
-                    nexts.append("http://en.wikipedia.org" + links[l])
-            # print "$$$$$", "$$$$$", nexts
-            for page in nexts:
-                yield Request(page, self.parse_entity_page, meta={'round': WikiSpider_ambiguity.ROUND - 1})
+            else:
+                print "@this is the exact disambiguation@", first_title
+                # so this is a truly ambiguity page
+                # we need to copy all the links down as the candidates
+                links = response.xpath \
+                    ('//div[@id="content"]'
+                     '/div[@id="bodyContent"]'
+                     '/div[@id="mw-content-text"]'
+                     '/descendant::ul/descendant::li/a/@href[not(contains(.,"#"))]').extract()
+                main_links = response.xpath(
+                    '//div[@id="content"]/div[@id="bodyContent"]/div[@id="mw-content-text"]/descendant::p/b/a/@href').extract()
+                for l in links:
+                    main_links.append(l)
+                links = main_links
+                # print links
+                nexts = []
+                for l in range(0, min(WikiSpider_ambiguity.MAX_DIS_LINK, len(links))):
+                    if "wiki" not in links[l] or "disambiguation" in links[l]:
+                        # print "illegal" ,links[l]
+                        continue
+                    word = links[l][6:]
+                    word = word.replace("_", " ")
+                    if not self.record.has_key(word):
+                        self.record[first_title].append(word)
+                        nexts.append("http://en.wikipedia.org" + links[l])
+                # print "$$$$$", "$$$$$", nexts
+                for page in nexts:
+                    yield Request(page, self.parse_entity_page, meta={'round': WikiSpider_ambiguity.ROUND - 1})
         elif "Wikipedia does not have an article with this exact name" in body_text:
             print "have no the correspondent article", first_title
             self.record[first_title] = []

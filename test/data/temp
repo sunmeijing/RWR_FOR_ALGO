@@ -29,9 +29,93 @@ small online doc test:
 			fail:Jiaotong University,Apple
 		doc1:
 			pass:stock commodity NASDAQ NewYork stockexchange Share market 
-			fail:price 
+			fail:price
+
 Bernie:20 20
 	normal:
-		pass 14/21	
+		pass 14/21
+    with_dot:
+        pass 14/21
 
-		
+Can the Big Apple Circus Be saved: 20 10 2
+    normal:
+        pass 17/25
+    with_dot:
+        pass 16/25
+    prior:
+        pass 15/25
+
+Drew Houston of Dropbox:
+    normal:
+        pass 6/18
+    with_dot:
+        pass 12/18
+    prior:
+        pass 15/18
+
+For Driveless Cars:
+    normal:
+        pass 20/31
+    with_dot:
+        pass 26/31
+    prior:
+        pass 25/31
+
+The Families that can't afford Summer:
+    normal:
+        pass 12/21
+    with_dot
+        pass 15/21
+    prior:
+        pass 17/21
+
+Ali:
+    normal:
+        pass 20/27
+    with_dot:
+        pass 26/27
+    prior:
+        pass 24/27
+
+Where Hillary Clinton's Heavy Attack:
+    normal:
+        pass 30/33
+    with_dot:
+        pass 27/33
+    prior:
+        pass 30/33
+
+
+Liquid:
+    normal:
+        pass 12/20
+    with_dot:
+        pass 13/20
+    prior:
+        pass 16/20
+
+Opera:
+    normal:
+        pass 10/14
+    with_dot:
+        pass 13/14
+    prior:
+        pass:10/14
+
+
+[kl=10,normal]
+Where Hillary Clinton's Heavy Attack:29/33
+For Driveless Cars 21/31
+Liquid 10/20
+
+[prob=0.5,normal]?
+Where Hillary Clinton's Heavy Attack: 29/33
+For Driveless Cars 22/31
+Liquid  13/20
+
+[depth=3,width=10, normal]
+Where Hillary Clinton's Heavy Attack:
+For Driveless Cars
+Liquid 11/20
+
+[depth=3,width=10, normal]

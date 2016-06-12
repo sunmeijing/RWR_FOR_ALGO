@@ -21,3 +21,4 @@ $California$,California
 $Hillary Clinton$,Hillary Clinton
 $candidate$,The Candidate (1964 film)
 $Democratic Party$,None
+,choice,with_dot,width,10,depth,2,prob,0.85,kl_l,20
