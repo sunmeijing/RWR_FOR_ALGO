@@ -1,124 +1,0 @@
-,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559207.24,1465559207.28correctness.txt,answer:english,literaturezs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559253.77,1465559253.79correctness.txt,answer:cpu,sciencemaths,sciencezs,njzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559317.93,1465559317.94correctness.txt,answer:zs,shzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559367.95,1465559367.95correctness.txt,answer:literature,Nonezs,bjzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465559660.91,1465559660.93correctness.txt,answer:computer,automationtree,binary treealgorithm,partitioncomplex,spacewhat,something,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559755.04,1465559755.05correctness.txt,answer:stock,fishprice,location,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559828.36,1465559828.37correctness.txt,answer:stock,fishprice,location,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465559842.52,1465559842.53correctness.txt,answer:stock,fishprice,location,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465559858.73,1465559858.74correctness.txt,answer:stock,marketprice,market,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465560462.39,1465560462.4correctness.txt,answer:stock,something not importantprice,something not important 2,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465560478.44,1465560478.45correctness.txt,answer:I,first person,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465560554.64,1465560577.68correctness.txt,answer:I,first person,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465560691.09,1465560691.09correctness.txt,answer:I,zs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561017.28,1465561017.29correctness.txt,answer:zs,maths,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561047.72,1465561047.73correctness.txt,answer:zs,shzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561160.93,1465561160.94correctness.txt,answer:english,literaturezs,bjzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561174.98,1465561174.99correctness.txt,answer:cpu,sciencemaths,sciencezs,njzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561179.85,1465561179.86correctness.txt,answer:zs,shzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561184.78,1465561184.79correctness.txt,answer:literature,Nonezs,shzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561228.5,1465561228.51correctness.txt,answer:computer,automationtree,tree new beealgorithm,partitioncomplex,timewhat,something,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561562.92,1465561562.93correctness.txt,answer:computer,automationtree,tree new beealgorithm,partitioncomplex,timewhat,something,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561599.12,1465561599.13correctness.txt,answer:stock,marketprice,market,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561605.01,1465561605.02correctness.txt,answer:I,zs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561683.35,1465561683.36correctness.txt,answer:I,zs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561723.56,1465561723.59correctness.txt,answer:science,timealgorithm,complexwhat,somethingcomputer,automationtree,tree new bee,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561760.62,1465561760.63correctness.txt,answer:science,timealgorithm,complexwhat,somethingcomputer,automationtree,binary tree,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465561786.83,1465561786.84correctness.txt,answer:literature,Nonezs,shzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561824.21,1465561824.22correctness.txt,answer:literature,Nonezs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561842.27,1465561842.28correctness.txt,answer:science,spacealgorithm,complexwhat,somethingcomputer,automationtree,binary tree,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561850.95,1465561850.96correctness.txt,answer:stock,something not importantprice,something not important 2,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561895.26,1465561895.26correctness.txt,answer:english,literaturezs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561900.67,1465561900.68correctness.txt,answer:cpu,sciencemaths,sciencezs,njzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561905.03,1465561905.03correctness.txt,answer:zs,maths,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561911.78,1465561911.79correctness.txt,answer:literature,Nonezs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561916.45,1465561916.46correctness.txt,answer:science,spacealgorithm,complexwhat,somethingcomputer,automationtree,binary tree,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561921.78,1465561921.79correctness.txt,answer:stock,something not importantprice,something not important 2,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561927.95,1465561927.96correctness.txt,answer:I,zs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561959.57,1465561959.58correctness.txt,answer:science,spacealgorithm,complexwhat,somethingcomputer,automationtree,binary tree,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465561973.03,1465561973.05correctness.txt,answer:literature,Nonezs,bjzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465562200.38,1465562200.39correctness.txt,answer:literature,Nonezs,shzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465562315.99,1465562316.0correctness.txt,answer:literature,Nonezs,shzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562353.31,1465562353.32correctness.txt,answer:english,literaturezs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562365.86,1465562365.87correctness.txt,answer:cpu,sciencemaths,sciencezs,njzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562370.49,1465562370.5correctness.txt,answer:zs,maths,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562381.06,1465562381.07correctness.txt,answer:literature,Nonezs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562387.37,1465562387.38correctness.txt,answer:science,spacealgorithm,complexwhat,somethingcomputer,automationtree,binary tree,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562394.5,1465562394.51correctness.txt,answer:stock,something not importantprice,something not important 2,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562399.36,1465562399.37correctness.txt,answer:I,zs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465562417.87,1465562417.88correctness.txt,answer:literature,Nonezs,shzs,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465562448.07,1465562448.08correctness.txt,answer:literature,whatzs,bjzs,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465562476.35,1465562476.36correctness.txt,answer:literature,whatzs,bjzs,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562565.08,1465562565.1correctness.txt,answer:english,literaturezs,shzs,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562576.88,1465562576.9correctness.txt,answer:cpu,sciencemaths,sciencezs,shzs,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562724.55,1465562724.57
-correctness.txt,answer:
-zs,shzs
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562776.5,1465562776.53
-correctness.txt,answer:
-literature,what
-zs,shzs
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562795.76,1465562795.84
-correctness.txt,answer:
-science,time
-algorithm,complex
-what,something
-computer,automation
-tree,binary tree
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562832.26,1465562832.27
-correctness.txt,answer:
-stock,finance
-price,market
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562846.25,1465562846.27
-correctness.txt,answer:
-I,zs
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562859.62,1465562859.64
-correctness.txt,answer:
-english,literature
-zs,shzs
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562867.67,1465562867.7
-correctness.txt,answer:
-cpu,science
-maths,science
-zs,shzs
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465562873.55,1465562873.56
-correctness.txt,answer:
-zs,shzs
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465562953.0,1465562953.01
-correctness.txt,answer:
-english,literature
-zs,shzs
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465562972.34,1465562972.35
-correctness.txt,answer:
-cpu,science
-maths,science
-zs,shzs
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465562984.17,1465562984.18
-correctness.txt,answer:
-zs,shzs
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465563022.66,1465563022.67
-correctness.txt,answer:
-literature,what
-zs,shzs
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465563034.6,1465563034.61
-correctness.txt,answer:
-science,time
-algorithm,complex
-what,something
-computer,automation
-tree,binary tree
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465563052.8,1465563052.8
-correctness.txt,answer:
-science,time
-algorithm,complex
-what,something
-computer,automation
-tree,apple tree
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465563067.47,1465563067.48
-correctness.txt,answer:
-stock,market
-price,market
-,choice,prior,width,8,depth,3,prob,0.85,kl_l,20,time,1465563085.55,1465563085.56
-correctness.txt,answer:
-I,zs
-,choice,only_simrank,width,8,depth,3,prob,0.85,kl_l,20,time,1465563112.09,1465563112.16
-correctness.txt,answer:
-science,time
-algorithm,complex
-what,something
-computer,automation
-tree,apple tree
-,choice,normal,width,8,depth,3,prob,0.85,kl_l,20,time,1465563157.86,1465563157.88
-correctness.txt,answer:
-science,space
-algorithm,complex
-what,something
-computer,automation
-tree,binary tree
-,choice,with_dot,width,8,depth,3,prob,0.85,kl_l,20,time,1465563164.87,1465563164.88
-correctness.txt,answer:
-science,time
-algorithm,complex
-what,something
-computer,automation
-tree,binary tree
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563196.02,1465563196.03
-correctness.txt,answer:
-english,literature
-zs,bjzs
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563213.95,1465563213.96
-correctness.txt,answer:
-cpu,science
-maths,science
-zs,njzs
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563226.8,1465563226.8
-correctness.txt,answer:
-zs,maths
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563245.97,1465563245.98
-correctness.txt,answer:
-literature,what
-zs,bjzs
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563258.73,1465563258.74
-correctness.txt,answer:
-science,space
-algorithm,complex
-what,something
-computer,automation
-tree,binary tree
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563268.87,1465563268.88
-correctness.txt,answer:
-stock,something not important
-price,something not important 2
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563286.39,1465563286.4
-correctness.txt,answer:
-I,first person
-,choice,only_rwr,width,8,depth,3,prob,0.85,kl_l,20,time,1465563711.63,1465563711.65
-correctness.txt,answer:
-I,first person
